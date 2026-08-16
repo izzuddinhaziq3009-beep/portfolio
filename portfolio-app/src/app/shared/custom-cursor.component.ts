@@ -261,10 +261,13 @@ export class CustomCursorComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // Exact pointer position when idle (ease factor 1 == instant snap);
     // magnetically eases toward the hovered element's center — the
-    // "grab" — while hovering.
-    const targetX = hover ? hover.rect.left + hover.rect.width / 2 : pointer.clientX;
-    const targetY = hover ? hover.rect.top + hover.rect.height / 2 : pointer.clientY;
-    const positionEase = hover ? ARROW_MAGNET_EASE : 1;
+    // "grab" — while hovering. 'card-action' targets (small buttons nested
+    // inside a card) opt out of the pull entirely so the cursor never drifts
+    // away from the real click point.
+    const magnetic = !!hover && hover.variant !== 'card-action';
+    const targetX = magnetic ? hover!.rect.left + hover!.rect.width / 2 : pointer.clientX;
+    const targetY = magnetic ? hover!.rect.top + hover!.rect.height / 2 : pointer.clientY;
+    const positionEase = magnetic ? ARROW_MAGNET_EASE : 1;
 
     const beforeX = this.arrowX;
     this.arrowX = lerp(this.arrowX, targetX, positionEase);
@@ -312,8 +315,9 @@ export class CustomCursorComponent implements OnInit, AfterViewInit, OnDestroy {
 
     arrow.style.opacity = active ? '1' : '0';
 
-    const cx = hover ? hover.rect.left + hover.rect.width / 2 : x;
-    const cy = hover ? hover.rect.top + hover.rect.height / 2 : y;
+    const magnetic = !!hover && hover.variant !== 'card-action';
+    const cx = magnetic ? hover!.rect.left + hover!.rect.width / 2 : x;
+    const cy = magnetic ? hover!.rect.top + hover!.rect.height / 2 : y;
     const scale = !hover ? ARROW_BASE_SCALE : hover.variant === 'card' ? ARROW_CARD_SCALE : ARROW_HOVER_SCALE;
     this.arrowX = cx;
     this.arrowY = cy;

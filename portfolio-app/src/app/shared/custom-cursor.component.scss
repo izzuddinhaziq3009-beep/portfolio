@@ -27,6 +27,9 @@
   svg {
     display: block;
     overflow: visible;
+    // Belt-and-suspenders: already inherited from the parent, but explicit
+    // here so the cursor can never intercept clicks meant for page content.
+    pointer-events: none;
   }
 }
 

@@ -1,6 +1,14 @@
 import { Injectable, signal } from '@angular/core';
 
-export type CursorVariant = 'default' | 'text' | 'card';
+/**
+ * 'card-action' is for small interactive elements (links/buttons) nested
+ * inside a 'card'-variant container — e.g. the "Live Demo"/"Code / GitHub"
+ * links inside a project card. It shows the same hover glow as 'text' but
+ * skips the magnetic position pull, so the cursor keeps tracking the real
+ * pointer exactly instead of easing toward the target's center — that pull
+ * is what made those small nested buttons feel hard to click.
+ */
+export type CursorVariant = 'default' | 'text' | 'card' | 'card-action';
 
 export interface CursorHoverTarget {
   rect: DOMRect;
