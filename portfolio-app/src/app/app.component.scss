@@ -1,0 +1,48 @@
+// Fixed page-level backdrop: sits behind the navbar/sections/footer and
+// stays put while they scroll over it. Particle network + code typewriter
+// components are absolutely positioned inside this (see their own :host
+// styles) and inherit full-viewport sizing from it.
+.pf-page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--pf-bg);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+// Two-column layout: sticky profile card on the left, scrolling content on
+// the right. This is now the single horizontal container for everything
+// inside it — the individual sections no longer wrap themselves in
+// .pf-container, they just fill .pf-layout__main.
+.pf-layout {
+  display: grid;
+  grid-template-columns: minmax(240px, 300px) 1fr;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: start;
+  max-width: var(--pf-layout-max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.pf-layout__sidebar {
+  position: sticky;
+  top: 6rem;
+  align-self: start;
+}
+
+.pf-layout__main {
+  min-width: 0;
+}
+
+@media (max-width: 899px) {
+  .pf-layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .pf-layout__sidebar {
+    position: static;
+    top: auto;
+  }
+}

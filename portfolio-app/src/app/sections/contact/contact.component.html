@@ -1,0 +1,86 @@
+<section
+  id="contact"
+  appSection="contact"
+  appScrollReveal
+  (appScrollRevealChange)="revealed = $event"
+  [@reveal]="revealed ? 'visible' : 'hidden'"
+  class="pf-section pf-contact"
+  aria-labelledby="contact-heading"
+>
+  <h2 id="contact-heading" class="pf-section-heading pf-section-heading--upper">Let's Work Together</h2>
+  <p class="pf-section-subheading">
+    Have an opportunity or a question? Reach out directly or send a message below.
+  </p>
+
+  <div class="pf-contact__grid">
+    <ul class="pf-contact__links">
+      <li>
+        <a [href]="'mailto:' + contact.email" appMagneticCursor="text">
+          <mat-icon aria-hidden="true">mail</mat-icon>
+          <span>{{ contact.email }}</span>
+        </a>
+      </li>
+      <li>
+        <a [href]="contact.github" target="_blank" rel="noopener noreferrer" appMagneticCursor="text">
+          <mat-icon aria-hidden="true">code</mat-icon>
+          <span>GitHub</span>
+        </a>
+      </li>
+      <li>
+        <a [href]="contact.linkedin" target="_blank" rel="noopener noreferrer" appMagneticCursor="text">
+          <mat-icon aria-hidden="true">work</mat-icon>
+          <span>LinkedIn</span>
+        </a>
+      </li>
+    </ul>
+
+    <form class="pf-contact__form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+      <mat-form-field appearance="outline" class="pf-contact__field">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" autocomplete="name" required appMagneticCursor="text" />
+        @if (name.invalid && name.touched) {
+          <mat-error>
+            @if (name.hasError('required')) {
+              Please enter your name.
+            } @else {
+              Name must be at least 2 characters.
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="pf-contact__field">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" autocomplete="email" required appMagneticCursor="text" />
+        @if (email.invalid && email.touched) {
+          <mat-error>
+            @if (email.hasError('required')) {
+              Please enter your email.
+            } @else {
+              Please enter a valid email address.
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="pf-contact__field">
+        <mat-label>Message</mat-label>
+        <textarea matInput formControlName="message" rows="5" required appMagneticCursor="text"></textarea>
+        @if (message.invalid && message.touched) {
+          <mat-error>
+            @if (message.hasError('required')) {
+              Please enter a message.
+            } @else {
+              Message must be at least 10 characters.
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" type="submit" appMagneticCursor="text">
+        <mat-icon aria-hidden="true">send</mat-icon>
+        Send Message
+      </button>
+    </form>
+  </div>
+</section>

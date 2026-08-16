@@ -1,0 +1,16 @@
+<section
+  id="home"
+  appSection="home"
+  appScrollReveal
+  (appScrollRevealChange)="revealed = $event"
+  [@reveal]="revealed ? 'visible' : 'hidden'"
+  class="pf-hero"
+  aria-labelledby="hero-heading"
+>
+  <div class="pf-hero__overlay"></div>
+
+  <div class="pf-hero__inner">
+    <h1 id="hero-heading" class="pf-hero__headline">{{ hero.title }}</h1>
+    <p class="pf-hero__tagline">{{ hero.tagline }}</p>
+  </div>
+</section>

@@ -1,0 +1,39 @@
+<section
+  id="experience"
+  appSection="experience"
+  appScrollReveal
+  (appScrollRevealChange)="revealed = $event"
+  [@reveal]="revealed ? 'visible' : 'hidden'"
+  class="pf-section pf-experience"
+  aria-labelledby="experience-heading"
+>
+  <h2 id="experience-heading" class="pf-section-heading pf-section-heading--upper">Experience</h2>
+
+  <ol class="pf-timeline">
+    <li class="pf-timeline__item" *ngFor="let entry of experience">
+      <div class="pf-timeline__marker" aria-hidden="true"></div>
+
+      <mat-card class="pf-timeline__card">
+        <header class="pf-timeline__header">
+          <h3 class="pf-timeline__role">{{ entry.role }}</h3>
+          <p class="pf-timeline__company">{{ entry.company }}</p>
+          <p class="pf-timeline__location" *ngIf="entry.location">
+            <mat-icon aria-hidden="true">place</mat-icon>
+            <span>{{ entry.location }}</span>
+          </p>
+          <p class="pf-timeline__dates">{{ entry.dates }}</p>
+        </header>
+
+        <mat-divider></mat-divider>
+
+        <ul class="pf-timeline__bullets">
+          <li *ngFor="let bullet of entry.bullets">{{ bullet }}</li>
+        </ul>
+
+        <mat-chip-set aria-label="Technologies used">
+          <mat-chip *ngFor="let tech of entry.tech">{{ tech }}</mat-chip>
+        </mat-chip-set>
+      </mat-card>
+    </li>
+  </ol>
+</section>

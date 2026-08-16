@@ -1,0 +1,196 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$portfolio-light-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$violet-palette,
+    tertiary: mat.$cyan-palette,
+  ),
+  typography: (
+    brand-family: 'Roboto, "Helvetica Neue", sans-serif',
+  ),
+  density: (
+    scale: 0,
+  ),
+));
+
+$portfolio-dark-theme: mat.define-theme((
+  color: (
+    theme-type: dark,
+    primary: mat.$violet-palette,
+    tertiary: mat.$cyan-palette,
+  ),
+));
+
+html {
+  @include mat.all-component-themes($portfolio-light-theme);
+  color-scheme: light;
+
+  // Custom design tokens used by our own (non-Material) markup, kept in sync
+  // with the Material palette above so both look like one system.
+  --pf-bg: #faf9fc;
+  --pf-bg-rgb: 250, 249, 252;
+  --pf-surface: #ffffff;
+  --pf-surface-rgb: 255, 255, 255;
+  --pf-surface-alt: #f1edf7;
+  --pf-text: #1c1b1f;
+  --pf-text-rgb: 28, 27, 31;
+  --pf-text-muted: #49454f;
+  --pf-border: #e2dfe8;
+  --pf-primary: #6750a4;
+  --pf-primary-rgb: 103, 80, 164;
+  --pf-primary-contrast: #ffffff;
+  --pf-shadow: 0 4px 20px rgba(40, 20, 70, 0.08);
+  --pf-shadow-hover: 0 10px 30px rgba(40, 20, 70, 0.14);
+  --pf-max-width: 1120px;
+  --pf-layout-max-width: 1280px;
+  --pf-section-spacing: clamp(3rem, 6vw, 6rem);
+  --pf-font-heading: 'Space Grotesk', Roboto, 'Helvetica Neue', sans-serif;
+
+  // Profile photo framing, shared by the profile card and preloader avatars.
+  // Tune these two to reframe the photo without changing the circle's size.
+  --pf-avatar-position: 35% 20%;
+  --pf-avatar-zoom: 0.9;
+}
+
+html.dark-theme {
+  @include mat.all-component-colors($portfolio-dark-theme);
+  color-scheme: dark;
+
+  --pf-bg: #131215;
+  --pf-bg-rgb: 19, 18, 21;
+  --pf-surface: #1d1b20;
+  --pf-surface-rgb: 29, 27, 32;
+  --pf-surface-alt: #262429;
+  --pf-text: #e6e1e6;
+  --pf-text-rgb: 230, 225, 230;
+  --pf-text-muted: #cac4d0;
+  --pf-border: #3a373e;
+  --pf-primary: #d0bcff;
+  --pf-primary-rgb: 208, 188, 255;
+  --pf-primary-contrast: #381e72;
+  --pf-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  --pf-shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  background: var(--pf-bg);
+  color: var(--pf-text);
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+// Native cursor is replaced by CustomCursorComponent's SVG arrow. The
+// component only adds this class on fine-pointer (non-touch) devices, so
+// touch devices keep their normal cursor behavior untouched.
+html.pf-custom-cursor-active,
+html.pf-custom-cursor-active * {
+  cursor: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+// Applied to <body> while the intro preloader is on screen.
+.pf-no-scroll {
+  overflow: hidden;
+}
+
+// Visually-hidden utility for accessible skip links / screen-reader-only text.
+.pf-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.pf-skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  z-index: 1000;
+  background: var(--pf-surface);
+  color: var(--pf-text);
+  padding: 0.75rem 1.25rem;
+  border-radius: 4px;
+  box-shadow: var(--pf-shadow);
+  transition: top 150ms ease;
+
+  &:focus {
+    top: 1rem;
+  }
+}
+
+.pf-container {
+  max-width: var(--pf-max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.pf-section {
+  padding-block: var(--pf-section-spacing);
+}
+
+.pf-section-heading {
+  font-family: var(--pf-font-heading);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.5rem;
+}
+
+// Big, confident uppercase treatment used by the restructured main-column
+// sections (Recent Projects, Experience, My Stack, Let's Work Together).
+.pf-section-heading--upper {
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  margin-bottom: 1.75rem;
+}
+
+.pf-section-eyebrow {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pf-primary);
+  margin: 0 0 0.5rem;
+}
+
+.pf-section-subheading {
+  color: var(--pf-text-muted);
+  max-width: 640px;
+  margin: 0 0 2.5rem;
+  line-height: 1.6;
+}

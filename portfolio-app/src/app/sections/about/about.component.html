@@ -1,0 +1,25 @@
+<section
+  id="about"
+  appSection="about"
+  appScrollReveal
+  (appScrollRevealChange)="revealed = $event"
+  [@reveal]="revealed ? 'visible' : 'hidden'"
+  class="pf-section pf-about"
+  aria-labelledby="about-heading"
+>
+  <h2 id="about-heading" class="pf-section-heading pf-section-heading--upper">About</h2>
+
+  <div class="pf-about__content">
+    <div class="pf-about__avatar" aria-hidden="true">
+      <span>{{ initials }}</span>
+    </div>
+
+    <mat-card class="pf-about__card">
+      <p class="pf-about__bio" *ngFor="let paragraph of about.bio">{{ paragraph }}</p>
+      <p class="pf-about__location">
+        <mat-icon aria-hidden="true">place</mat-icon>
+        <span>{{ about.location }}</span>
+      </p>
+    </mat-card>
+  </div>
+</section>

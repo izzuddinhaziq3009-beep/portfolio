@@ -1,0 +1,85 @@
+.pf-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--pf-shadow);
+  // Frosted-glass sticky header — the animated backdrop now scrolls
+  // underneath the whole page, so the toolbar needs its own contrast
+  // rather than relying on an opaque page background.
+  background: rgba(var(--pf-surface-rgb), 0.72) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.pf-navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 1rem;
+}
+
+.pf-navbar__brand {
+  font-family: var(--pf-font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: inherit;
+  letter-spacing: 0.01em;
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 4px;
+  }
+}
+
+.pf-navbar__links {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
+
+  @media (max-width: 719px) {
+    display: none;
+  }
+}
+
+.pf-navbar__link {
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  opacity: 0.85;
+  transition: opacity 150ms ease, background-color 150ms ease;
+
+  &:hover {
+    opacity: 1;
+    background-color: rgba(128, 128, 128, 0.12);
+  }
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+
+  &--active {
+    opacity: 1;
+    font-weight: 700;
+  }
+}
+
+.pf-navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.pf-navbar__menu-trigger {
+  display: none;
+
+  @media (max-width: 719px) {
+    display: inline-flex;
+  }
+}

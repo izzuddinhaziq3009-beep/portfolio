@@ -1,0 +1,61 @@
+.pf-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: min(60vh, 520px);
+  padding-block: clamp(2.5rem, 6vw, 4rem) 1.5rem;
+}
+
+// The animated backdrop (particle network + typed code) is now a fixed,
+// page-level layer mounted in AppComponent, behind everything. This scrim
+// just adds local contrast behind the hero text specifically.
+.pf-hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 95% 78% at 32% 42%,
+    rgba(var(--pf-bg-rgb), 0.97) 0%,
+    rgba(var(--pf-bg-rgb), 0.78) 45%,
+    rgba(var(--pf-bg-rgb), 0.35) 72%,
+    rgba(var(--pf-bg-rgb), 0) 92%
+  );
+}
+
+@media (max-width: 720px) {
+  .pf-hero__overlay {
+    background: radial-gradient(
+      ellipse 100% 85% at 50% 38%,
+      rgba(var(--pf-bg-rgb), 0.97) 0%,
+      rgba(var(--pf-bg-rgb), 0.8) 55%,
+      rgba(var(--pf-bg-rgb), 0.5) 100%
+    );
+  }
+}
+
+.pf-hero__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.pf-hero__headline {
+  font-family: var(--pf-font-heading);
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  max-width: 100%;
+  margin: 0 0 1.25rem;
+  color: var(--pf-text);
+}
+
+.pf-hero__tagline {
+  font-size: 1.1rem;
+  color: var(--pf-text-muted);
+  max-width: 540px;
+  line-height: 1.65;
+  margin: 0;
+}

@@ -1,0 +1,12 @@
+<div
+  class="pf-stats"
+  appScrollReveal
+  (appScrollRevealChange)="revealed = $event"
+  [@reveal]="revealed ? 'visible' : 'hidden'"
+  aria-label="Quick stats"
+>
+  <div class="pf-stats__item" *ngFor="let stat of stats">
+    <span class="pf-stats__value">{{ stat.value }}</span>
+    <span class="pf-stats__label">{{ stat.label }}</span>
+  </div>
+</div>

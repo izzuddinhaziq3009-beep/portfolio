@@ -1,0 +1,44 @@
+.pf-stack__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.pf-stack-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.5rem 1rem;
+  border-radius: 14px;
+  background: rgba(var(--pf-surface-rgb), 0.7);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: var(--pf-shadow);
+  transition: box-shadow 200ms ease, transform 200ms ease;
+
+  &:hover {
+    box-shadow: var(--pf-shadow-hover);
+    transform: translateY(-3px);
+  }
+}
+
+.pf-stack-tile__icon {
+  line-height: 1;
+}
+
+// Devicon's non-"colored" marks (Next.js, Vercel) render as solid black
+// glyphs rather than following currentColor, so they vanish on a dark
+// background. Invert them to white when dark mode is active.
+::host-context(.dark-theme) .pf-stack-tile__icon--mono {
+  filter: invert(1);
+}
+
+.pf-stack-tile__name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--pf-text);
+  text-align: center;
+}

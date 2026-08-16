@@ -1,0 +1,103 @@
+:host {
+  display: contents;
+}
+
+.pf-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 20000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--pf-bg);
+  pointer-events: none;
+  transition: transform 550ms cubic-bezier(0.65, 0, 0.35, 1), opacity 550ms ease;
+}
+
+.pf-preloader--exit {
+  transform: translateY(-100%);
+  opacity: 0.4;
+}
+
+.pf-preloader__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.pf-preloader__avatar {
+  width: clamp(72px, 14vw, 110px);
+  height: clamp(72px, 14vw, 110px);
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--pf-primary);
+  border: 3px solid var(--pf-primary);
+  box-shadow: 0 0 30px rgba(var(--pf-primary-rgb), 0.3);
+  opacity: 0;
+  transform: scale(0.82);
+  transition: opacity 550ms cubic-bezier(0.22, 1, 0.36, 1), transform 550ms cubic-bezier(0.22, 1, 0.36, 1);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--pf-avatar-position, 50% 50%);
+    transform: scale(var(--pf-avatar-zoom, 1));
+    transform-origin: center;
+  }
+}
+
+.pf-preloader__avatar--in {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.pf-preloader__avatar-fallback {
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  font-weight: 700;
+  color: var(--pf-primary-contrast);
+}
+
+.pf-preloader__name {
+  font-family: var(--pf-font-heading);
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--pf-text);
+  margin: 0;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 500ms ease 150ms, transform 500ms cubic-bezier(0.22, 1, 0.36, 1) 150ms;
+}
+
+.pf-preloader__name--in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.pf-preloader__bar-track {
+  width: clamp(140px, 30vw, 220px);
+  height: 3px;
+  border-radius: 999px;
+  background: var(--pf-border);
+  overflow: hidden;
+}
+
+.pf-preloader__bar-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--pf-primary);
+  border-radius: inherit;
+  transition: width 1400ms cubic-bezier(0.65, 0, 0.35, 1) 250ms;
+}
+
+.pf-preloader__bar-fill--in {
+  width: 100%;
+}

@@ -1,0 +1,100 @@
+.pf-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: relative;
+}
+
+.pf-timeline__item {
+  position: relative;
+  padding-left: 2rem;
+
+  &:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 1.5rem;
+    bottom: -2rem;
+    width: 2px;
+    background: var(--pf-border);
+  }
+}
+
+.pf-timeline__marker {
+  position: absolute;
+  left: 0;
+  top: 0.4rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--pf-primary);
+}
+
+.pf-timeline__card {
+  padding: 1.5rem 1.75rem;
+  background: rgba(var(--pf-surface-rgb), 0.8);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: var(--pf-shadow);
+  transition: box-shadow 200ms ease, transform 200ms ease;
+
+  &:hover {
+    box-shadow: var(--pf-shadow-hover);
+    transform: translateY(-2px);
+  }
+}
+
+.pf-timeline__header {
+  margin-bottom: 1rem;
+}
+
+.pf-timeline__role {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.pf-timeline__company {
+  font-weight: 500;
+  color: var(--pf-primary);
+  margin: 0.15rem 0;
+}
+
+.pf-timeline__location {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0 0 0.15rem;
+  color: var(--pf-text-muted);
+  font-size: 0.85rem;
+
+  mat-icon {
+    font-size: 1.05rem;
+    width: 1.05rem;
+    height: 1.05rem;
+  }
+}
+
+.pf-timeline__dates {
+  color: var(--pf-text-muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.pf-timeline__bullets {
+  margin: 1rem 0;
+  padding-left: 1.25rem;
+  color: var(--pf-text);
+  line-height: 1.7;
+
+  li {
+    margin-bottom: 0.4rem;
+  }
+}
+
+mat-chip-set {
+  margin-top: 0.5rem;
+}

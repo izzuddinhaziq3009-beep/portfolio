@@ -1,0 +1,36 @@
+<section
+  id="education"
+  appSection="education"
+  appScrollReveal
+  (appScrollRevealChange)="revealed = $event"
+  [@reveal]="revealed ? 'visible' : 'hidden'"
+  class="pf-section pf-education"
+  aria-labelledby="education-heading"
+>
+  <h2 id="education-heading" class="pf-section-heading pf-section-heading--upper">Education</h2>
+
+  <ol class="pf-edu-timeline">
+    <li class="pf-edu-timeline__item" *ngFor="let entry of education">
+      <div class="pf-edu-timeline__marker" aria-hidden="true"></div>
+
+      <mat-card class="pf-edu-timeline__card">
+        <header class="pf-edu-timeline__header">
+          <h3 class="pf-edu-timeline__degree">{{ entry.degree }}</h3>
+          <p class="pf-edu-timeline__institution">{{ entry.institution }}</p>
+          <p class="pf-edu-timeline__location" *ngIf="entry.location">
+            <mat-icon aria-hidden="true">place</mat-icon>
+            <span>{{ entry.location }}</span>
+          </p>
+          <p class="pf-edu-timeline__dates">{{ entry.dates }}</p>
+        </header>
+
+        <mat-divider></mat-divider>
+
+        <mat-chip-set aria-label="Education details">
+          <mat-chip>Field: {{ entry.field }}</mat-chip>
+          <mat-chip>CGPA: {{ entry.cgpa }}</mat-chip>
+        </mat-chip-set>
+      </mat-card>
+    </li>
+  </ol>
+</section>

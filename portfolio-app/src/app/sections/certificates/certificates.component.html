@@ -1,0 +1,57 @@
+<section
+  id="certificates"
+  appSection="certificates"
+  appScrollReveal
+  (appScrollRevealChange)="revealed = $event"
+  [@reveal]="revealed ? 'visible' : 'hidden'"
+  class="pf-section pf-certificates"
+  aria-labelledby="certificates-heading"
+>
+  <h2 id="certificates-heading" class="pf-section-heading pf-section-heading--upper">Certifications</h2>
+
+  <ng-template #cardBody let-cert let-i="i">
+    <mat-card class="pf-certificate-card">
+      <div class="pf-certificate-card__thumb">
+        <img
+          *ngIf="showImage(i)"
+          [src]="cert.image"
+          [alt]="cert.title + ' certificate'"
+          (error)="onImageError(i)"
+        />
+        <mat-icon *ngIf="!showImage(i)" aria-hidden="true">verified</mat-icon>
+      </div>
+
+      <div class="pf-certificate-card__body">
+        <p class="pf-certificate-card__title">{{ cert.title }}</p>
+        <p class="pf-certificate-card__meta">
+          <span>{{ cert.issuer }}</span>
+          <span *ngIf="cert.date"> · {{ cert.date }}</span>
+        </p>
+        <p class="pf-certificate-card__view" *ngIf="cert.url">
+          <span>View credential</span>
+          <mat-icon aria-hidden="true">open_in_new</mat-icon>
+        </p>
+      </div>
+    </mat-card>
+  </ng-template>
+
+  <div class="pf-certificates__grid">
+    <ng-container *ngFor="let cert of certificates; let i = index">
+      <a
+        *ngIf="cert.url; else noLinkCard"
+        class="pf-certificate-card__link"
+        [href]="cert.url"
+        target="_blank"
+        rel="noopener noreferrer"
+        appMagneticCursor="card"
+      >
+        <ng-container *ngTemplateOutlet="cardBody; context: { $implicit: cert, i: i }"></ng-container>
+      </a>
+      <ng-template #noLinkCard>
+        <div class="pf-certificate-card__link" appMagneticCursor="card">
+          <ng-container *ngTemplateOutlet="cardBody; context: { $implicit: cert, i: i }"></ng-container>
+        </div>
+      </ng-template>
+    </ng-container>
+  </div>
+</section>

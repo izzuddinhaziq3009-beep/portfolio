@@ -1,0 +1,58 @@
+<section
+  id="projects"
+  appSection="projects"
+  appScrollReveal
+  (appScrollRevealChange)="revealed = $event"
+  [@reveal]="revealed ? 'visible' : 'hidden'"
+  class="pf-section pf-projects"
+  aria-labelledby="projects-heading"
+>
+  <h2 id="projects-heading" class="pf-section-heading pf-section-heading--upper">Recent Projects</h2>
+
+  <div class="pf-projects__grid">
+    <mat-card class="pf-project-card" *ngFor="let project of projects; let i = index" appMagneticCursor="card">
+      <div class="pf-project-card__thumb">
+        <img *ngIf="showImage(i)" [src]="project.image" [alt]="project.name + ' screenshot'" (error)="onImageError(i)" />
+        <mat-icon *ngIf="!showImage(i)" aria-hidden="true">web</mat-icon>
+      </div>
+
+      <mat-card-header>
+        <mat-card-title>{{ project.name }}</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p class="pf-project-card__description">{{ project.description }}</p>
+
+        <mat-chip-set aria-label="Technologies used">
+          <mat-chip *ngFor="let tech of project.tech">{{ tech }}</mat-chip>
+        </mat-chip-set>
+      </mat-card-content>
+
+      <mat-card-actions class="pf-project-card__actions">
+        <a
+          *ngIf="project.demoUrl"
+          mat-button
+          color="primary"
+          [href]="project.demoUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          appMagneticCursor="text"
+        >
+          <mat-icon aria-hidden="true">open_in_new</mat-icon>
+          Live Demo
+        </a>
+        <a
+          *ngIf="project.githubUrl"
+          mat-button
+          [href]="project.githubUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          appMagneticCursor="text"
+        >
+          <mat-icon aria-hidden="true">code</mat-icon>
+          Code / GitHub
+        </a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</section>

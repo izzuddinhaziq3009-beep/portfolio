@@ -1,0 +1,24 @@
+<section
+  id="stack"
+  appSection="stack"
+  appScrollReveal
+  (appScrollRevealChange)="revealed = $event"
+  [@reveal]="revealed ? 'visible' : 'hidden'"
+  class="pf-section pf-stack"
+  aria-labelledby="stack-heading"
+>
+  <h2 id="stack-heading" class="pf-section-heading pf-section-heading--upper">Skills</h2>
+
+  <div class="pf-stack__grid">
+    <div class="pf-stack-tile" *ngFor="let item of stack">
+      <i
+        class="pf-stack-tile__icon"
+        [class.pf-stack-tile__icon--mono]="isMonochrome(item.icon)"
+        [ngClass]="item.icon"
+        style="font-size: 40px"
+        aria-hidden="true"
+      ></i>
+      <span class="pf-stack-tile__name">{{ item.name }}</span>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,115 @@
+.pf-profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 2rem 1.75rem;
+  border-radius: 20px;
+  background: rgba(var(--pf-surface-rgb), 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--pf-shadow);
+  text-align: left;
+}
+
+.pf-profile-card__avatar {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  flex-shrink: 0;
+  border-radius: 22px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // Layered so the cutout reads as grounded rather than floating: a flat
+  // "elevated surface" panel (a shade lighter than the card behind it) with
+  // a soft purple glow centered behind the torso, both painted behind the
+  // <img> below since backgrounds always sit under in-flow content.
+  background:
+    radial-gradient(ellipse 65% 55% at 50% 42%, rgba(var(--pf-primary-rgb), 0.4) 0%, rgba(var(--pf-primary-rgb), 0) 72%),
+    var(--pf-surface-alt);
+  border: 1px solid rgba(var(--pf-primary-rgb), 0.28);
+  box-shadow: 0 0 36px rgba(var(--pf-primary-rgb), 0.22);
+  margin-bottom: 0.25rem;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    // The frame is narrower (relative to its height) than the source photo,
+    // so `cover` already shows the photo's full width with zero horizontal
+    // slack for `object-position` to pan — the crop is pinned exactly to the
+    // frame's left/right edges. A slight scale-up creates that slack so the
+    // subject can be nudged left within the same frame.
+    transform: translateX(-6%) scale(1.12);
+    transform-origin: center top;
+  }
+}
+
+.pf-profile-card__fallback {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--pf-primary);
+}
+
+.pf-profile-card__name {
+  font-family: var(--pf-font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--pf-text);
+}
+
+.pf-profile-card__tagline {
+  font-size: 0.95rem;
+  color: var(--pf-text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.pf-profile-card__socials {
+  display: flex;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: var(--pf-text-muted);
+    border: 1px solid var(--pf-border);
+    transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--pf-primary);
+      border-color: var(--pf-primary);
+      background-color: rgba(var(--pf-primary-rgb), 0.08);
+    }
+  }
+}
+
+@media (max-width: 899px) {
+  .pf-profile-card {
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  // Below the sidebar breakpoint the card spans the full page width, so the
+  // avatar needs its own cap again (still centered by the rule above) —
+  // otherwise it would stretch edge-to-edge with the much wider card.
+  .pf-profile-card__avatar {
+    max-width: 210px;
+  }
+
+  .pf-profile-card__socials {
+    justify-content: center;
+  }
+}

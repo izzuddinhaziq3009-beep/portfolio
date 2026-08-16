@@ -1,0 +1,19 @@
+@if (visible) {
+  <div class="pf-preloader" [class.pf-preloader--exit]="exiting" aria-hidden="true">
+    <div class="pf-preloader__content">
+      <div class="pf-preloader__avatar" [class.pf-preloader__avatar--in]="animateIn">
+        @if (!imageFailed) {
+          <img [src]="profileImageUrl" alt="" (error)="onImageError()" />
+        } @else {
+          <span class="pf-preloader__avatar-fallback">{{ initials }}</span>
+        }
+      </div>
+
+      <p class="pf-preloader__name" [class.pf-preloader__name--in]="animateIn">{{ name }}</p>
+
+      <div class="pf-preloader__bar-track">
+        <div class="pf-preloader__bar-fill" [class.pf-preloader__bar-fill--in]="animateIn"></div>
+      </div>
+    </div>
+  </div>
+}

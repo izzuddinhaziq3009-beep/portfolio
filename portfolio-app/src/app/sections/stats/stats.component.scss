@@ -1,0 +1,35 @@
+.pf-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(2rem, 5vw, 4rem);
+  padding-block: 1.75rem 2.5rem;
+  border-bottom: 1px solid var(--pf-border);
+  margin-bottom: 0.5rem;
+}
+
+.pf-stats__item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.pf-stats__value {
+  font-family: var(--pf-font-heading);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--pf-text);
+}
+
+.pf-stats__label {
+  font-size: 0.8rem;
+  color: var(--pf-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 599px) {
+  .pf-stats {
+    gap: 1.5rem;
+  }
+}

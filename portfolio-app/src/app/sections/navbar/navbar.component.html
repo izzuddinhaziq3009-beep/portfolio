@@ -1,0 +1,52 @@
+<a class="pf-skip-link" href="#main-content">Skip to main content</a>
+
+<mat-toolbar class="pf-navbar" role="banner">
+  <div class="pf-navbar__inner pf-container">
+    <a
+      class="pf-navbar__brand"
+      href="#home"
+      appMagneticCursor="text"
+      [attr.aria-label]="brandName + ' — back to top'"
+    >{{ brandName }}</a>
+
+    <nav class="pf-navbar__links" aria-label="Primary">
+      <a
+        *ngFor="let link of navLinks"
+        [href]="'#' + link.fragment"
+        class="pf-navbar__link"
+        appMagneticCursor="text"
+        [class.pf-navbar__link--active]="isActive(link.fragment)"
+        [attr.aria-current]="isActive(link.fragment) ? 'true' : null"
+      >
+        {{ link.label }}
+      </a>
+    </nav>
+
+    <div class="pf-navbar__actions">
+      <button
+        mat-icon-button
+        type="button"
+        appMagneticCursor
+        [matTooltip]="theme.mode() === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'"
+        [attr.aria-label]="theme.mode() === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'"
+        (click)="theme.toggle()"
+      >
+        <mat-icon>{{ theme.mode() === 'dark' ? 'light_mode' : 'dark_mode' }}</mat-icon>
+      </button>
+
+      <button
+        mat-icon-button
+        type="button"
+        class="pf-navbar__menu-trigger"
+        appMagneticCursor
+        [matMenuTriggerFor]="mobileMenu"
+        aria-label="Open navigation menu"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #mobileMenu="matMenu">
+        <a mat-menu-item *ngFor="let link of navLinks" [href]="'#' + link.fragment" appMagneticCursor="text">{{ link.label }}</a>
+      </mat-menu>
+    </div>
+  </div>
+</mat-toolbar>

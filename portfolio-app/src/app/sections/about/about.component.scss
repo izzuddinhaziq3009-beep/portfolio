@@ -1,0 +1,56 @@
+.pf-about__content {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2rem;
+  align-items: start;
+
+  @media (max-width: 599px) {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+}
+
+.pf-about__avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--pf-primary);
+  color: var(--pf-primary-contrast);
+  font-size: 3rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.pf-about__card {
+  padding: 1.75rem;
+  background: rgba(var(--pf-surface-rgb), 0.8);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: var(--pf-shadow);
+  max-width: 640px;
+}
+
+.pf-about__bio {
+  line-height: 1.7;
+  margin: 0 0 1rem;
+  color: var(--pf-text);
+}
+
+.pf-about__location {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0;
+  color: var(--pf-text-muted);
+  font-weight: 500;
+
+  mat-icon {
+    font-size: 1.2rem;
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+}
