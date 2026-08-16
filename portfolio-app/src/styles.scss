@@ -55,6 +55,17 @@ html {
   // Tune these two to reframe the photo without changing the circle's size.
   --pf-avatar-position: 35% 20%;
   --pf-avatar-zoom: 0.9;
+
+  // Matches mat-toolbar's own default height (and its internal breakpoint
+  // below) so the fixed navbar's height and the page content's compensating
+  // top padding never drift out of sync.
+  --pf-navbar-height: 64px;
+}
+
+@media (max-width: 599.98px) {
+  html {
+    --pf-navbar-height: 56px;
+  }
 }
 
 html.dark-theme {

@@ -35,7 +35,6 @@ const ARROW_BASE_SCALE = 1;
 const ARROW_HOVER_SCALE = 1.2;
 const ARROW_CARD_SCALE = 1.45;
 const ARROW_SCALE_EASE = 0.22;
-const ARROW_MAGNET_EASE = 0.16;
 
 const ARROW_MAX_TILT_DEG = 16;
 const ARROW_TILT_VELOCITY_FACTOR = 1.6;
@@ -57,12 +56,12 @@ function clamp(value: number, min: number, max: number): number {
 }
 
 /**
- * Custom cursor: a designed SVG arrow whose tip sits exactly at the pointer
- * when idle, and magnetically eases toward + grows over elements marked
- * with [appMagneticCursor] (the "grab"). Leans subtly in the direction of
- * travel, morphs (scale + accent glow) on hover, and leaves a short particle
- * trail + click burst in the purple accent. Fully disabled on coarse-pointer
- * (touch) devices; shows a simple, static (no trail/tilt) arrow under
+ * Custom cursor: a designed SVG arrow whose tip always sits exactly at the
+ * real pointer position — hovering an [appMagneticCursor] element never
+ * moves or snaps it, only grows it slightly and adds an accent glow. Leans
+ * subtly in the direction of travel, and leaves a short particle trail +
+ * click burst in the purple accent. Fully disabled on coarse-pointer (touch)
+ * devices; shows a simple, static (no trail/tilt) arrow under
  * prefers-reduced-motion.
  */
 @Component({
@@ -259,19 +258,12 @@ export class CustomCursorComponent implements OnInit, AfterViewInit, OnDestroy {
 
     arrow.style.opacity = pointer.active ? '1' : '0';
 
-    // Exact pointer position when idle (ease factor 1 == instant snap);
-    // magnetically eases toward the hovered element's center — the
-    // "grab" — while hovering. 'card-action' targets (small buttons nested
-    // inside a card) opt out of the pull entirely so the cursor never drifts
-    // away from the real click point.
-    const magnetic = !!hover && hover.variant !== 'card-action';
-    const targetX = magnetic ? hover!.rect.left + hover!.rect.width / 2 : pointer.clientX;
-    const targetY = magnetic ? hover!.rect.top + hover!.rect.height / 2 : pointer.clientY;
-    const positionEase = magnetic ? ARROW_MAGNET_EASE : 1;
-
+    // Always the exact pointer position — no magnetic pull toward hovered
+    // elements, over cards or anywhere else. Hover only changes scale/glow
+    // below, never position.
     const beforeX = this.arrowX;
-    this.arrowX = lerp(this.arrowX, targetX, positionEase);
-    this.arrowY = lerp(this.arrowY, targetY, positionEase);
+    this.arrowX = pointer.clientX;
+    this.arrowY = pointer.clientY;
 
     // Subtle lean in the direction of travel, derived from raw frame-to-frame
     // velocity (not the eased magnet position), clamped to a small range so
@@ -315,15 +307,12 @@ export class CustomCursorComponent implements OnInit, AfterViewInit, OnDestroy {
 
     arrow.style.opacity = active ? '1' : '0';
 
-    const magnetic = !!hover && hover.variant !== 'card-action';
-    const cx = magnetic ? hover!.rect.left + hover!.rect.width / 2 : x;
-    const cy = magnetic ? hover!.rect.top + hover!.rect.height / 2 : y;
     const scale = !hover ? ARROW_BASE_SCALE : hover.variant === 'card' ? ARROW_CARD_SCALE : ARROW_HOVER_SCALE;
-    this.arrowX = cx;
-    this.arrowY = cy;
+    this.arrowX = x;
+    this.arrowY = y;
     this.arrowScale = scale;
     this.arrowTilt = 0;
-    arrow.style.transform = `translate3d(${cx - ARROW_TIP_X}px, ${cy - ARROW_TIP_Y}px, 0) scale(${scale})`;
+    arrow.style.transform = `translate3d(${x - ARROW_TIP_X}px, ${y - ARROW_TIP_Y}px, 0) scale(${scale})`;
     arrow.classList.toggle('pf-cursor__arrow--active', !!hover);
     arrow.classList.toggle('pf-cursor__arrow--card', hover?.variant === 'card');
   }

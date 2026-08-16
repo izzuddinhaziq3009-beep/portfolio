@@ -1,17 +1,8 @@
 import { Injectable, signal } from '@angular/core';
 
-/**
- * 'card-action' is for small interactive elements (links/buttons) nested
- * inside a 'card'-variant container — e.g. the "Live Demo"/"Code / GitHub"
- * links inside a project card. It shows the same hover glow as 'text' but
- * skips the magnetic position pull, so the cursor keeps tracking the real
- * pointer exactly instead of easing toward the target's center — that pull
- * is what made those small nested buttons feel hard to click.
- */
-export type CursorVariant = 'default' | 'text' | 'card' | 'card-action';
+export type CursorVariant = 'default' | 'text' | 'card';
 
 export interface CursorHoverTarget {
-  rect: DOMRect;
   variant: CursorVariant;
 }
 
@@ -20,6 +11,8 @@ export interface CursorHoverTarget {
  * buttons, cards, social icons) to the single CustomCursorComponent. Each
  * hover registration gets a token so a stale mouseleave can't clobber a
  * newer mouseenter if the pointer crosses two elements in the same tick.
+ * The cursor always tracks the real pointer position — hover only changes
+ * its size/glow (see CustomCursorComponent), never its position.
  */
 @Injectable({ providedIn: 'root' })
 export class CustomCursorService {
@@ -27,9 +20,9 @@ export class CustomCursorService {
 
   private currentToken = 0;
 
-  setHover(rect: DOMRect, variant: CursorVariant): number {
+  setHover(variant: CursorVariant): number {
     const token = ++this.currentToken;
-    this.hoverTarget.set({ rect, variant });
+    this.hoverTarget.set({ variant });
     return token;
   }
 

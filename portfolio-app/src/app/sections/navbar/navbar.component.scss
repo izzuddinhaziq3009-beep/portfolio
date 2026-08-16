@@ -1,7 +1,9 @@
 .pf-navbar {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 100;
+  left: 0;
+  right: 0;
+  z-index: 1000;
   box-shadow: var(--pf-shadow);
   // Frosted-glass sticky header — the animated backdrop now scrolls
   // underneath the whole page, so the toolbar needs its own contrast

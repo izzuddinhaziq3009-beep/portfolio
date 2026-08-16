@@ -22,7 +22,10 @@
   align-items: start;
   max-width: var(--pf-layout-max-width);
   margin: 0 auto;
-  padding: 0 1.5rem;
+  // The navbar is now position: fixed (taken out of normal flow), so this
+  // top padding takes its place to keep the first section from sliding
+  // underneath it.
+  padding: var(--pf-navbar-height) 1.5rem 0;
 }
 
 .pf-layout__sidebar {

@@ -2,7 +2,14 @@
   "permissions": {
     "allow": [
       "PowerShell(Get-Process -Name chrome -ErrorAction SilentlyContinue)",
-      "PowerShell(Stop-Process -Force -ErrorAction SilentlyContinue)"
+      "PowerShell(Stop-Process -Force -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-CimInstance Win32_OperatingSystem | Select-Object @{n='FreeGB';e={[math]::Round\\($_.FreePhysicalMemory/1MB,2\\)}})",
+      "PowerShell(Get-Process -Name chrome -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue; Start-Sleep -Seconds 1; Get-CimInstance Win32_OperatingSystem | Select-Object @{n='FreeGB';e={[math]::Round\\($_.FreePhysicalMemory/1MB,2\\)}})",
+      "Bash(node verify-no-magnet.mjs)",
+      "Bash(rm -rf \"/c/Users/AjiQ/AppData/Local/Temp/claude/c--Users-AjiQ-OneDrive-Documents-portfolio/9ecf566b-9171-45af-a6e1-b00134915af7/scratchpad/node_modules\" \"/c/Users/AjiQ/AppData/Local/Temp/claude/c--Users-AjiQ-OneDrive-Documents-portfolio/9ecf566b-9171-45af-a6e1-b00134915af7/scratchpad/package-lock.json\")",
+      "Bash(curl -s -o /dev/null -w \"dev server: %{http_code}\\\\n\" http://localhost:4200)",
+      "Bash(node navbar-height.mjs)",
+      "Bash(node navbar-fixed-check.mjs .)"
     ]
   }
 }
