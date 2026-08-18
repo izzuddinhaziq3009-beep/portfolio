@@ -144,7 +144,7 @@ export const portfolioData: PortfolioData = {
       "I'm Haziq Izzuddin, a software engineer and recent graduate with a BSc (Hons) in Software Engineering from Multimedia University (MMU), Cyberjaya. I enjoy building full-stack web applications and turning real-world requirements into working, reliable software — from designing the data model to shipping the interface.",
       'During my degree and industrial training I worked across the stack with technologies like ASP.NET, C#, Blazor, SQL, and modern web tools such as TypeScript and Next.js. I care about writing clean, maintainable code and understanding the reasoning behind a system, not just how to build it. I\'m currently looking for a junior software engineer role where I can keep learning and contribute to products that make a difference.',
     ],
-    location: 'Kuala Lumpur, Malaysia',
+    location: 'Shah Alam, Selangor, Malaysia',
     avatarUrl: null,
   },
 
@@ -262,13 +262,13 @@ export const portfolioData: PortfolioData = {
   ],
 
   contact: {
-    email: 'haziq@example.com',
+    email: 'izzuddinhaziq3009@gmail.com',
     github: 'https://github.com/yourusername',
     linkedin: 'https://linkedin.com/in/yourusername',
     socials: [
       { label: 'GitHub', url: 'https://github.com/yourusername', icon: 'code' },
       { label: 'LinkedIn', url: 'https://linkedin.com/in/yourusername', icon: 'work' },
-      { label: 'Email', url: 'mailto:haziq@example.com', icon: 'mail' },
+      { label: 'Email', url: 'mailto:izzuddinhaziq3009@gmail.com', icon: 'mail' },
     ],
   },
 
